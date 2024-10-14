@@ -25,8 +25,16 @@
                     <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-4">Manteniendo ciclos de vida</h1>
                     <p class="lead fw-semibold mb-4">Es una organización que nació para mejorar la vida de las personas por medio de la ciencia, educando, implementando, manteniendo, controlando y optimizando el ciclo de vida de entidades y su entorno.</p>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                        <button type="button" class="btn btn-primary btn-lg px-4 me-md-2"><i class="fas fa-sign-in-alt"></i> Entrar</button>
-                        <button type="button" class="btn btn-info btn-lg px-4"><i class="far fa-address-book"></i> Registrarme</button>
+                        @if( Route::has('login'))
+                            @auth
+                                <a href="{{ route('/home') }}" class="btn btn-primary btn-lg px-4 me-md-2">Entrar</a>
+                            @else
+                                <a href="{{ route('login') }}" class="btn btn-primary btn-lg px-4 me-md-2"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</a>
+                                @if( Route::has('register'))
+                                    <a href="{{ route('register') }}" class="btn btn-info btn-lg px-4"><i class="far fa-address-book"></i> Registrarme</a>
+                                @endif
+                            @endauth
+                        @endif
                     </div>
                 </div>
             </div>
