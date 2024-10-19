@@ -18,3 +18,6 @@ Route::post('/rol/actualizar', [App\Http\Controllers\RoleController::class, 'upd
 Route::post('/rol/borrar', [App\Http\Controllers\RoleController::class, 'destroy'])->name('borrar-rol');
 
 Route::get('/permisos', [App\Http\Controllers\PermissionController::class, 'index'])->name('permisos');
+Route::post('/permiso/agregar', [App\Http\Controllers\PermissionController::class, 'store'])->name('agregar-permiso');
+Route::post('/permiso/actualizar', [App\Http\Controllers\PermissionController::class, 'update'])->name('actualizar-permiso');
+Route::post('/permiso/borrar', [App\Http\Controllers\PermissionController::class, 'destroy'])->name('borrar-permiso');

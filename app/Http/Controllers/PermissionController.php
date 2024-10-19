@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\Permisos\Create;
+use App\Http\Requests\Permisos\Update;
+use App\Http\Requests\Permisos\Delete;
+use Spatie\Permission\Models\Permission;
+
+use function PHPUnit\Framework\returnValue;
 
 class PermissionController extends Controller
 {
@@ -11,7 +17,17 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            
+            $permisos = Permission::all();
+
+            return view('usuarios.permisos.index', compact('permisos'));
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
     }
 
     /**
@@ -25,9 +41,26 @@ class PermissionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Create $request)
     {
-        //
+        try {
+            
+            $permiso = Permission::create([
+
+                'name' => $request->nombre,
+
+            ]);
+
+            $datos['exito'] = true;
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**
@@ -49,16 +82,53 @@ class PermissionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Update $request)
     {
-        //
+        try {
+            
+            $permiso = Permission::where('id', '=', $request->id)
+                    ->update([
+
+                        'name' => $request->nombre,
+
+                    ]);
+
+            $datos['exito'] = true;
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Delete $request)
     {
-        //
+        try {
+            
+            $permiso = Permission::find( $request->id );
+
+            if( $permiso->id ){
+
+                $permiso->delete();
+
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 }
