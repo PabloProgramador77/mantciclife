@@ -59,4 +59,9 @@
 
     @include('usuarios.nuevo')
     @include('usuarios.editar')
+
+    <script src="{{ asset('/js/usuarios/create.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/js/usuarios/read.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/js/usuarios/update.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/js/usuarios/delete.js') }}" type="text/javascript"></script>
 @stop

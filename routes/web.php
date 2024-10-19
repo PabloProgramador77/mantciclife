@@ -11,3 +11,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/usuarios', [App\Http\Controllers\UserController::class, 'index'])->name('usuarios');
+
+Route::get('/roles', [App\Http\Controllers\RoleController::class, 'index'])->name('roles');
+Route::post('/rol/agregar', [App\Http\Controllers\RoleController::class, 'store'])->name('agregar-rol');
+Route::post('/rol/actualizar', [App\Http\Controllers\RoleController::class, 'update'])->name('actualizar-rol');
+Route::post('/rol/borrar', [App\Http\Controllers\RoleController::class, 'destroy'])->name('borrar-rol');
+
+Route::get('/permisos', [App\Http\Controllers\PermissionController::class, 'index'])->name('permisos');
