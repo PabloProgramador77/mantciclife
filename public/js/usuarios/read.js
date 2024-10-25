@@ -8,12 +8,14 @@ jQuery(document).ready(function(){
         e.preventDefault();
 
         $("#nombreEditar").val('');
-        $("#idCaja").val('');
+        $("#idUsuario").val('');
 
-        var nombre = $(this).attr('data-value').split(',')[1];
         var id = $(this).attr('data-value').split(',')[0];
+        var nombre = $(this).attr('data-value').split(',')[1];
+        var email = $(this).attr('data-value').split(',')[2];
+        var rol = $(this).attr('data-value').split(',')[3];
 
-        console.log( 'Caja: ' + nombre );
+        console.log( rol );
 
         if( id === null || id === '' ){
 
@@ -28,10 +30,17 @@ jQuery(document).ready(function(){
 
             });
 
+            $("#actualizar").attr('disabled', true);
+
         }else{
 
             $("#nombreEditar").val( nombre );
-            $("#idCaja").val( id );
+            $("#idUsuario").val( id );
+            $("#emailEditar").val( email );
+
+            $("#roleEditar").prepend('<option value="'+rol+'">'+rol+'</option>');
+            $("#roleEditar").val(rol);
+            $("#roleEditar option[value='"+rol+"']:not(:first)").remove();
 
             $("#actualizar").attr('disabled', false);
 

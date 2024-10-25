@@ -39,11 +39,10 @@
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td><span class="p-1 text-center rounded bg-info">Developer</span></td>
+                                <td><span class="p-1 text-center rounded bg-info">{{ $user->getRoleNames()->first() ? : 'Sin rol' }}</span></td>
                                 <td>
-                                    <button class="btn shadow border border-info" data-value="{{ $user->id }}, {{ $user->name }}, {{ $user->email }}" data-toggle="modal" data-target="#editarUsuario" title="Editar usuario"><i class="fas fa-user-edit"></i></button>
-                                    <button class="btn shadow border border-primary" data-value="{{ $user->id }}, {{ $user->name }}, {{ $user->email }}" data-toggle="modal" title="Permisos de usuario"><i class="fas fa-user-cog"></i></button>
-                                    <button class="btn shadow border border-danger" data-value="{{ $user->id }}, {{ $user->name }}"><i class="fas fa-user-minus" title="Eliminar usuario"></i></button>
+                                    <button class="btn shadow border border-info editar" data-value="{{ $user->id }}, {{ $user->name }}, {{ $user->email }}, {{ $user->getRoleNames()->first() }}" data-toggle="modal" data-target="#editarUsuario" title="Editar usuario"><i class="fas fa-user-edit"></i></button>
+                                    <button class="btn shadow border border-danger borrar" data-value="{{ $user->id }}, {{ $user->name }}"><i class="fas fa-user-minus" title="Eliminar usuario"></i></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -60,6 +59,8 @@
     @include('usuarios.nuevo')
     @include('usuarios.editar')
 
+    <script src="{{ asset('/jquery-3.7.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/sweetAlert.js') }}" type="text/javascript"></script>
     <script src="{{ asset('/js/usuarios/create.js') }}" type="text/javascript"></script>
     <script src="{{ asset('/js/usuarios/read.js') }}" type="text/javascript"></script>
     <script src="{{ asset('/js/usuarios/update.js') }}" type="text/javascript"></script>

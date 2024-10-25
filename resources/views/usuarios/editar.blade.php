@@ -5,32 +5,36 @@
         </div>
         <div class="col-lg-12 p-1">
             <form class="form-group">
-                <x-adminlte-input type="text" id="nombre" name="nombre" placeholder="*Nombre de usuario">
+                <x-adminlte-input type="text" id="nombreEditar" name="nombreEditar" placeholder="*Nombre de usuario">
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
                             <i class="fas fa-user"></i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>
-                <x-adminlte-input type="email" id="email" name="email" placeholder="*Email de usuario">
+                <x-adminlte-input type="email" id="emailEditar" name="emailEditar" placeholder="*Email de usuario">
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
                             <i class="fas fa-envelope"></i>
                         </div>
                     </x-slot>
                 </x-adminlte-input>
-                <x-adminlte-select id="role" name="role" placeholder="*Rol de usuario">
+                <x-adminlte-select id="roleEditar" name="roleEditar" placeholder="*Rol de usuario">
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
                             <i class="fas fa-user-tag"></i>
                         </div>
                     </x-slot>
                     <option value="0">*Rol de usuario</option>
+                    @foreach( $roles as $rol )
+                        <option value="{{ $rol->name }}">{{ $rol->name }}</option>
+                    @endforeach
                 </x-adminlte-select>
+                <input type="hidden" name="idUsuario" id="idUsuario">
             </form>
         </div>
         <x-slot name="footerSlot">
-            <button class="btn btn-primary shadow"><i class="fas fa-user-clock"></i> Actualizar</button>
+            <button class="btn btn-primary shadow" id="actualizar"><i class="fas fa-user-clock"></i> Actualizar</button>
             <button class="btn btn-outline-danger shadow"><i class="fas fa-window-close"></i> Cancelar</button>
         </x-slot>
     </div>

@@ -26,11 +26,14 @@
                         </div>
                     </x-slot>
                     <option value="0">*Rol de usuario</option>
+                    @foreach( $roles as $rol )
+                        <option value="{{ $rol->name }}">{{ $rol->name }}</option>
+                    @endforeach
                 </x-adminlte-select>
             </form>
         </div>
         <x-slot name="footerSlot">
-            <button class="btn btn-primary shadow"><i class="fas fa-user-plus"></i> Agregar</button>
+            <button class="btn btn-primary shadow" id="registrar"><i class="fas fa-user-plus"></i> Agregar</button>
             <button class="btn btn-outline-danger shadow"><i class="fas fa-window-close"></i> Cancelar</button>
         </x-slot>
     </div>

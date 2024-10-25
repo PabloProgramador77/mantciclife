@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -17,7 +19,9 @@ class UserController extends Controller
             $users = User::orderBy('created_at', 'desc')
                     ->get();
 
-            return view('usuarios.index', compact('users'));
+            $roles = Role::all();
+
+            return view('usuarios.index', compact('users', 'roles'));
 
         } catch (\Throwable $th) {
             
@@ -39,7 +43,35 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+
+            $password = str_replace(' ', '', $request->nombre);
+            $password = strtolower( $password );
+
+            $usuario = User::create([
+
+                'name' => $request->nombre,
+                'email' => $request->email,
+                'password' => Hash::make( $password.'123' ),
+
+            ]);
+
+            if( $usuario->id ){
+
+                $usuario->assignRole( $request->rol );
+
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**
@@ -61,16 +93,61 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        try {
+            
+            $usuario = User::find( $request->id );
+            
+            if( $usuario->id ){
+
+                User::where('id', '=', $request->id)
+                    ->update([
+
+                        'name' => $request->nombre,
+                        'email' => $request->email,
+
+                    ]);
+
+                $usuario->assignRole( $request->rol );
+
+                $datos['exito'] = true;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        try {
+            
+            $usuario = User::find( $request->id );
+
+            if( $usuario->id ){
+
+                $usuario->delete();
+
+                $datos['exito'] = true;
+
+            }
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 }

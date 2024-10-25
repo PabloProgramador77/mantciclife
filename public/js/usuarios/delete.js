@@ -8,10 +8,10 @@ jQuery(document).ready(function(){
         Swal.fire({
 
             icon: 'warning',
-            title: '¿En verdad deseas borrar la caja '+$(this).attr('data-value')+'?',
+            title: '¿En verdad deseas borrar al usuario '+$(this).attr('data-value').split(',')[1]+'?',
             html: 'Los datos no podrán ser recuperados de ninguna manera.',
             allowOutsideClick: false,
-            confirmButtonText: 'Si, borrala',
+            confirmButtonText: 'Si, borralo',
             showConfirmButton: true,
             showDenyButton: true,
 
@@ -24,10 +24,10 @@ jQuery(document).ready(function(){
                 $.ajax({
 
                     type: 'POST',
-                    url: '/caja/borrar',
+                    url: '/usuario/borrar',
                     data:{
 
-                        'id' : $(this).attr('data-id'),
+                        'id' : $(this).attr('data-value').split(',')[0],
                         '_token' : csrfToken,
 
                     },
@@ -41,7 +41,7 @@ jQuery(document).ready(function(){
                         Swal.fire({
 
                             icon: 'success',
-                            title: 'Caja borrada.',
+                            title: 'Usuario borrado.',
                             allowOutsideClick: false,
                             showConfirmButton: true
 
@@ -49,7 +49,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/cajas';
+                                window.location.href = '/usuarios';
 
                             }
 
@@ -68,7 +68,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/cajas';
+                                window.location.href = '/usuarios';
 
                             }
 

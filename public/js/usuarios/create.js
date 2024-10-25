@@ -31,6 +31,8 @@ jQuery(document).ready(function(){
                     data:{
 
                         'nombre' : $("#nombre").val(),
+                        'email' : $("#email").val(),
+                        'rol' : $("#role").val(),
                         '_token' : csrfToken,
 
                     },
@@ -44,7 +46,7 @@ jQuery(document).ready(function(){
                         Swal.fire({
 
                             icon: 'success',
-                            title: 'usuario registrada',
+                            title: 'Usuario registrado',
                             allowOutsideClick: false,
                             showConfirmButton: true
 

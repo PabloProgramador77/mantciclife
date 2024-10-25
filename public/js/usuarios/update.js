@@ -10,7 +10,7 @@ jQuery(document).ready(function(){
 
         Swal.fire({
 
-            title: 'Actualizando caja',
+            title: 'Actualizando usuario',
             html: 'Un momento por favor: <b></b>',
             timer: 9975,
             allowOutsideClick: false,
@@ -27,11 +27,13 @@ jQuery(document).ready(function(){
                 $.ajax({
 
                     type: 'POST',
-                    url: '/caja/actualizar',
+                    url: '/usuario/actualizar',
                     data:{
 
                         'nombre' : $("#nombreEditar").val(),
-                        'id' : $("#idCaja").val(),
+                        'email' : $("#emailEditar").val(),
+                        'id' : $("#idUsuario").val(),
+                        'rol' : $("#roleEditar").val(),
                         '_token' : csrfToken,
 
                     },
@@ -45,7 +47,7 @@ jQuery(document).ready(function(){
                         Swal.fire({
 
                             icon: 'success',
-                            title: 'Caja actualizada',
+                            title: 'Usuario actualizado',
                             allowOutsideClick: false,
                             showConfirmButton: true
 
@@ -53,7 +55,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/cajas';
+                                window.location.href = '/usuarios';
 
                             }
 
@@ -72,7 +74,7 @@ jQuery(document).ready(function(){
 
                             if( resultado.isConfirmed ){
 
-                                window.location.href = '/cajas';
+                                window.location.href = '/usuarios';
 
                             }
 
@@ -104,7 +106,7 @@ jQuery(document).ready(function(){
 
                     if( resultado.isConfirmed ){
 
-                        window.location.href = '/cajas';
+                        window.location.href = '/usuarios';
 
                     }
 
