@@ -36,7 +36,7 @@
         <div class="container-fluid row rounded bg-white mt-1 p-3">
             <div class="col-lg-12 col-md-6 col-sm-6">
                 @php
-                    $heads = ['#', 'Rol de usuario', 'Acciones'];
+                    $heads = ['#', 'Rol de usuario', 'Permisos', 'Acciones'];
                 @endphp
                 <x-adminlte-datatable id="contenedorrols" theme="light" head-theme="dark" :heads="$heads" compressed striped hoverable beautify>
                     @if( count( $roles) > 0 )
@@ -44,9 +44,21 @@
                             <tr>
                                 <td>{{ $rol->id }}</td>
                                 <td>{{ $rol->name }}</td>
+                                <td class="row">
+                                    @if( count( $rol->permissions ) > 0)
+                                        @php
+                                            $permissions = $rol->permissions;
+                                        @endphp
+                                        @foreach( $rol->permissions as $permission )
+                                            <span class="text-center bg-teal col-lg-3 col-md-4 col-sm-6 border border-white">{{ $permission->name }}</span>
+                                        @endforeach
+                                    @else
+                                        <span class="p-1 text-center bg-info rounded shadow">Sin permisos</span>
+                                    @endif
+                                </td>
                                 <td>
                                     <button class="btn shadow border border-info editar" data-value="{{ $rol->id }}, {{ $rol->name }}" data-toggle="modal" data-target="#editarRol" title="Editar rol"><i class="fas fa-edit"></i></button>
-                                    <button class="btn shadow border border-primary permisos" data-value="{{ $rol->id }}, {{ $rol->name }}" data-toggle="modal" title="Permisos de rol"><i class="fas fa-cogs"></i></button>
+                                    <button class="btn shadow border border-primary permisos" data-value="{{ $rol->id }}, {{ $rol->name }}" data-toggle="modal" data-target="#permisosRol" title="Permisos de rol"><i class="fas fa-cogs"></i></button>
                                     <button class="btn shadow border border-danger borrar" data-value="{{ $rol->id }}, {{ $rol->name }}"><i class="fas fa-minus" title="Eliminar rol"></i></button>
                                 </td>
                             </tr>
@@ -63,6 +75,7 @@
 
     @include('usuarios.roles.nuevo')
     @include('usuarios.roles.editar')
+    @include('usuarios.roles.permisos')
 
     <script src="{{ asset('/jquery-3.7.js') }}" type="text/javascript"></script>
     <script src="{{ asset('/sweetAlert.js') }}" type="text/javascript"></script>
@@ -70,4 +83,5 @@
     <script src="{{ asset('/js/roles/read.js') }}" type="text/javascript"></script>
     <script src="{{ asset('/js/roles/update.js') }}" type="text/javascript"></script>
     <script src="{{ asset('/js/roles/delete.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/js/roles/permisos.js') }}" type="text/javascript"></script>
 @stop

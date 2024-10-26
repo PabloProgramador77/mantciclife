@@ -34,7 +34,7 @@
         </div>
         <x-slot name="footerSlot">
             <button class="btn btn-primary shadow" id="registrar"><i class="fas fa-user-plus"></i> Agregar</button>
-            <button class="btn btn-outline-danger shadow"><i class="fas fa-window-close"></i> Cancelar</button>
+            <button class="btn btn-outline-danger shadow" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar</button>
         </x-slot>
     </div>
 </x-adminlte-modal>

@@ -7,6 +7,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Requests\Roles\Create;
 use App\Http\Requests\Roles\Update;
 use App\Http\Requests\Roles\Delete;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -19,7 +20,9 @@ class RoleController extends Controller
             
             $roles = Role::all();
 
-            return view('usuarios.roles.index', compact('roles'));
+            $permisos = Permission::all();
+
+            return view('usuarios.roles.index', compact('roles', 'permisos'));
 
         } catch (\Throwable $th) {
             
@@ -31,9 +34,28 @@ class RoleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create( Request $request )
     {
-        //
+        try {
+            
+            $role = Role::find( $request->id );
+
+            if( $role && $role->id ){
+
+                $role->syncPermissions( $request->permisos );
+
+                $datos['exito'] = true;
+                
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**
@@ -64,9 +86,29 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show( Request $request )
     {
-        //
+        try {
+            
+            $rol = Role::find( $request->id );
+
+            if( $rol && $rol->id ){
+
+                $permisos = $rol->permissions;
+
+                $datos['exito'] = true;
+                $datos['permisos'] = $permisos;
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**

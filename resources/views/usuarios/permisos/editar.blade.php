@@ -17,7 +17,7 @@
         </div>
         <x-slot name="footerSlot">
             <button class="btn btn-primary shadow" id="actualizar"><i class="fas fa-user-clock"></i> Actualizar</button>
-            <button class="btn btn-outline-danger shadow"><i class="fas fa-window-close"></i> Cancelar</button>
+            <button class="btn btn-outline-danger shadow" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar</button>
         </x-slot>
     </div>
 </x-adminlte-modal>
