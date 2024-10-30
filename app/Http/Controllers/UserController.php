@@ -58,7 +58,7 @@ class UserController extends Controller
 
             if( $usuario->id ){
 
-                $usuario->assignRole( $request->rol );
+                $usuario->syncRoles( [$request->rol] );
 
                 $datos['exito'] = true;
 
@@ -109,7 +109,7 @@ class UserController extends Controller
 
                     ]);
 
-                $usuario->assignRole( $request->rol );
+                $usuario->syncRoles( [$request->rol] );
 
                 $datos['exito'] = true;
 
