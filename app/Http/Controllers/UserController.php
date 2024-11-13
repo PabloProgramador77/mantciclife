@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use App\Http\Requests\Users\Profile;
 
 class UserController extends Controller
 {
@@ -35,7 +36,23 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        try {
+            
+            if( auth()->user()->id ){
+
+                return view('usuarios.perfil');
+
+            }else{
+
+                return redirect('/');
+
+            }
+
+        } catch (\Throwable $th) {
+            
+            echo $th->getMessage();
+
+        }
     }
 
     /**
@@ -85,9 +102,28 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit( Profile $request )
     {
-        //
+        try {
+            
+            $usuario = User::where('id', '=', auth()->user()->id)
+                    ->update([
+
+                        'name' => $request->nombre,
+                        'email' => $request->email,
+
+                    ]);
+
+            $datos['exito'] = true;
+
+        } catch (\Throwable $th) {
+            
+            $datos['exito'] = false;
+            $datos['mensaje'] = $th->getMessage();
+
+        }
+
+        return response()->json( $datos );
     }
 
     /**
