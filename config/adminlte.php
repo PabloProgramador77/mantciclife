@@ -313,7 +313,12 @@ return [
                     'url' => '/permisos',
                     'icon' => 'fas fa-user-cog',
                 ]
-            ]
+            ],
+        ],
+        [
+            'text' => 'Materiales',
+            'icon' => 'fab fa-mdb',
+            'url' => 'materiales',
         ],
     ],
 
