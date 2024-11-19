@@ -35,3 +35,8 @@ Route::get('/materiales', [App\Http\Controllers\MaterialController::class, 'inde
 Route::post('/material/agregar', [App\Http\Controllers\MaterialController::class, 'store'])->name('agregar-material');
 Route::post('/material/actualizar', [App\Http\Controllers\MaterialController::class, 'update'])->name('actualizar-material');
 Route::post('/material/borrar', [App\Http\Controllers\MaterialController::class, 'destroy'])->name('borrar-material');
+
+Route::get('/categorias', [App\Http\Controllers\CategoriaController::class, 'index'])->name('categorias');
+Route::post('/categoria/agregar', [App\Http\Controllers\CategoriaController::class, 'store'])->name('agregar-categoria');
+Route::post('/categoria/actualizar', [App\Http\Controllers\CategoriaController::class, 'update'])->name('actualizar-categoria');
+Route::post('/categoria/borrar', [App\Http\Controllers\CategoriaController::class, 'destroy'])->name('borrar-categoria');

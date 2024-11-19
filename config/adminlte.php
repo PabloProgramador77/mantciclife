@@ -320,6 +320,11 @@ return [
             'icon' => 'fab fa-mdb',
             'url' => 'materiales',
         ],
+        [
+            'text' => 'Categorías',
+            'icon' => 'fas fa-tags',
+            'url' => 'categorias',
+        ],
     ],
 
     /*
