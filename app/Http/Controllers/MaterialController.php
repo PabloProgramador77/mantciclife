@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Materiales\Create;
 use App\Http\Requests\Materiales\Update;
 use App\Http\Requests\Materiales\Delete;
+use App\Models\Categoria;
 
 class MaterialController extends Controller
 {
@@ -18,8 +19,9 @@ class MaterialController extends Controller
         try {
             
             $materiales = Material::all();
+            $categorias = Categoria::all();
 
-            return view('materiales.index', compact('materiales'));
+            return view('materiales.index', compact('materiales', 'categorias'));
 
         } catch (\Throwable $th) {
             
@@ -48,6 +50,7 @@ class MaterialController extends Controller
                 'nombre' => $request->nombre,
                 'precio' => $request->precio,
                 'descripcion' => $request->descripcion,
+                'idCategoria' => $request->categoria,
 
             ]);
 
@@ -92,6 +95,7 @@ class MaterialController extends Controller
                         'nombre' => $request->nombre,
                         'precio' => $request->precio,
                         'descripcion' => $request->descripcion,
+                        'idCategoria' => $request->categoria,
 
                     ]);
 

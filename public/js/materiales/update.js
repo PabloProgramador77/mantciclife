@@ -34,6 +34,7 @@ jQuery(document).ready(function(){
                         'precio' : $("#precioEditar").val(),
                         'id' : $("#idMaterial").val(),
                         'descripcion' : $("#descripcionEditar").val(),
+                        'categoria' : $("#categoriaEditar").val(),
                         '_token' : csrfToken,
 
                     },

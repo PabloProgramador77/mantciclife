@@ -26,6 +26,17 @@
                         </div>
                     </x-slot>
                 </x-adminlte-input>
+                <x-adminlte-select id="categoria" name="categoria" placeholder="Categoria">
+                    <x-slot name="prependSlot">
+                        <div class="input-group-text">
+                            <i class="fas fa-tag">*</i>
+                        </div>
+                    </x-slot>
+                    <option value="0">Elige una categoría</option>
+                    @foreach( $categorias as $categoria )
+                        <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
+                    @endforeach
+                </x-adminlte-select>
             </form>
         </div>
         <x-slot name="footerSlot">

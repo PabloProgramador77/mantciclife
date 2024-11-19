@@ -16,6 +16,8 @@ jQuery(document).ready(function(){
         var nombre = $(this).attr('data-value').split(',')[1];
         var precio = $(this).attr('data-value').split(',')[2];
         var descripcion = $(this).attr('data-value').split(',')[3];
+        var idCategoria = $(this).attr('data-value').split(',')[4];
+        var categoria = $(this).attr('data-value').split(',')[5];
 
         console.log( id );
 
@@ -40,6 +42,10 @@ jQuery(document).ready(function(){
             $("#idMaterial").val( id );
             $("#precioEditar").val( precio );
             $("#descripcionEditar").val( descripcion );
+
+            $("#categoriaEditar").prepend('<option value="'+idCategoria+'">'+categoria+'</option>');
+            $("#categoriaEditar").val( idCategoria );
+            $("#categoriaEditar option[value='"+idCategoria+"']:not(:first)").remove();
 
             $("#actualizar").attr('disabled', false);
 

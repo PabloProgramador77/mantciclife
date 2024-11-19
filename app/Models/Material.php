@@ -16,6 +16,13 @@ class Material extends Model
         'nombre',
         'precio',
         'descripcion',
+        'idCategoria',
 
     ];
+
+    public function categoria(){
+
+        return $this->hasOne( Categoria::class, 'id', 'idCategoria');
+        
+    }
 }

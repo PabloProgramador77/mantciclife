@@ -30,7 +30,7 @@
         <div class="container-fluid row rounded bg-white mt-1 p-3">
             <div class="col-lg-12 col-md-6 col-sm-6">
                 @php
-                    $heads = ['#', 'Material', 'Precio', 'Acciones'];
+                    $heads = ['#', 'Material', 'Precio', 'Categoria', 'Acciones'];
                 @endphp
                 <x-adminlte-datatable id="contenedorMateriales" theme="light" head-theme="dark" :heads="$heads" compressed striped hoverable beautify>
                     @if( count( $materiales) > 0 )
@@ -39,8 +39,9 @@
                                 <td>{{ $material->id }}</td>
                                 <td>{{ $material->nombre }}</td>
                                 <td>$ {{ $material->precio }}</td>
+                                <td>{{ ( $material->categoria->nombre ) }}</td>
                                 <td>
-                                    <button class="btn shadow border border-info editar" data-value="{{ $material->id }}, {{ $material->nombre }}, {{ $material->precio }}, {{ $material->descripcion }}" data-toggle="modal" data-target="#editarMaterial" title="Editar material"><i class="fas fa-edit"></i></button>
+                                    <button class="btn shadow border border-info editar" data-value="{{ $material->id }}, {{ $material->nombre }}, {{ $material->precio }}, {{ $material->descripcion }}, {{ $material->categoria->id }}, {{ $material->categoria->nombre }}" data-toggle="modal" data-target="#editarMaterial" title="Editar material"><i class="fas fa-edit"></i></button>
                                     <button class="btn shadow border border-danger borrar" data-value="{{ $material->id }}, {{ $material->nombre }}"><i class="fas fa-trash" title="Eliminar material"></i></button>
                                 </td>
                             </tr>
