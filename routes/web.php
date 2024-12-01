@@ -9,7 +9,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', function(){
+    return view('index');
+})->name('home');   
 
 Route::get('/profile/username', [App\Http\Controllers\UserController::class, 'create'])->name('perfil-usuario');
 
@@ -40,3 +42,10 @@ Route::get('/categorias', [App\Http\Controllers\CategoriaController::class, 'ind
 Route::post('/categoria/agregar', [App\Http\Controllers\CategoriaController::class, 'store'])->name('agregar-categoria');
 Route::post('/categoria/actualizar', [App\Http\Controllers\CategoriaController::class, 'update'])->name('actualizar-categoria');
 Route::post('/categoria/borrar', [App\Http\Controllers\CategoriaController::class, 'destroy'])->name('borrar-categoria');
+
+Route::get('/solicitudes', [App\Http\Controllers\SolicitudController::class, 'index'])->name('solicitudes');
+Route::post('/solicitud/agregar', [App\Http\Controllers\SolicitudController::class, 'store'])->name('agregar-solicitud');
+Route::post('/solicitud/exportar', [App\Http\Controllers\SolicitudController::class, 'create'])->name('exportar-solicitud');
+Route::post('/solicitud/buscar', [App\Http\Controllers\SolicitudController::class, 'show'])->name('buscar-solicitud');
+Route::post('/solicitud/actualizar', [App\Http\Controllers\SolicitudController::class, 'update'])->name('actualizar-solicitud');
+Route::post('/solicitud/borrar', [App\Http\Controllers\SolicitudController::class, 'destroy'])->name('borrar-solicitud');

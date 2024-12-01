@@ -325,6 +325,22 @@ return [
             'icon' => 'fas fa-tags',
             'url' => 'categorias',
         ],
+        [
+            'text' => 'Requerimientos',
+            'icon' => 'fas fa-folder',
+            'submenu' => [
+                [
+                    'text' => 'Requerimientos',
+                    'icon' => 'fas fa-folder',
+                    'url' => 'requerimientos',
+                ],
+                [
+                    'text' => 'Solicitudes',
+                    'icon' => 'fas fa-file',
+                    'url' => 'solicitudes',
+                ],
+            ],
+        ],
     ],
 
     /*
